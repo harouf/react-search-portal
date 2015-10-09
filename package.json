@@ -1,15 +1,17 @@
 {
-  "name": "react-redux-universal-hot-example",
-  "description": "Example of an isomorphic (universal) webapp using react redux and hot reloading",
-  "author": "Erik Rasmussen <rasmussenerik@gmail.com> (http://github.com/erikras)",
+  "name": "react-search-portal",
+  "description": "ReactJS based resource search portal.",
+  "author": "Fujio Harou <harouf@outlook.com> (http://github.com/harouf)",
   "license": "MIT",
-  "version": "0.0.5",
+  "version": "0.0.1",
   "repository": {
     "type": "git",
-    "url": "https://github.com/erikras/react-redux-universal-hot-example"
+    "url": "https://github.com/harouf/react-search-portal"
   },
-  "homepage": "https://github.com/erikras/react-redux-universal-hot-example",
+  "homepage": "https://github.com/harouf/react-search-portal",
   "keywords": [
+    "search",
+    "portal",
     "react",
     "isomorphic",
     "universal",
