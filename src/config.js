@@ -4,7 +4,7 @@ module.exports = {
     port: process.env.PORT,
     apiPort: process.env.APIPORT,
     app: {
-      name: 'React Redux Example Development'
+      name: 'Resource Search Portal'
     }
   },
   production: {
@@ -12,7 +12,7 @@ module.exports = {
     port: process.env.PORT,
     apiPort: process.env.APIPORT,
     app: {
-      name: 'React Redux Example Production'
+      name: 'Resource Search Portal'
     }
   }
 }[process.env.NODE_ENV || 'development'];

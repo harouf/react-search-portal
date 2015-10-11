@@ -6,14 +6,32 @@ import * as authActions from 'redux/modules/auth';
 import {isLoaded as isAuthLoaded, load as loadAuth} from 'redux/modules/auth';
 
 @connect(
-  state => ({user: state.auth.user}),
+  state => ({user: state.auth.user, loginError: state.auth.loginError}),
   dispatch => bindActionCreators(authActions, dispatch)
 )
 export default class Login extends Component {
   static propTypes = {
     user: PropTypes.object,
+    loginError: PropTypes.string,
     login: PropTypes.func,
     logout: PropTypes.func
+  }
+
+  constructor( props ) {
+    super( props );
+    this.state = {
+      formSubmitted: false
+    };
+  }
+
+  componentDidMount() {
+    // console.log('component did mount');
+  }
+
+  componentWillReceiveProps( nextProps ) {
+    if (nextProps.loginError) {
+      // this.setState( { loginError: nextProps.loginError } );
+    }
   }
 
   static fetchData(getState, dispatch) {
@@ -25,25 +43,34 @@ export default class Login extends Component {
   handleSubmit(event) {
     event.preventDefault();
     const input = this.refs.username;
-    this.props.login(input.value);
+    const pwd = this.refs.password;
+    this.props.login(input.value, pwd.value);
     input.value = '';
+    pwd.value = '';
+    this.setState( { formSubmitted: true } );
   }
 
   render() {
-    const {user, logout} = this.props;
+    const {user, loginError, logout} = this.props;
     const styles = require('./Login.scss');
     return (
       <div className={styles.loginPage + ' container'}>
-        <DocumentMeta title="React Redux Example: Login"/>
+        <DocumentMeta title="ReactJS Based Search Portal: Login"/>
         <h1>Login</h1>
         {!user &&
         <div>
           <form className="login-form" onSubmit={::this.handleSubmit}>
             <input type="text" ref="username" placeholder="Enter a username"/>
+            <input type="password" ref="password" placeholder="Enter password"/>
             <button className="btn btn-success" onClick={::this.handleSubmit}><i className="fa fa-sign-in"/>{' '}Log In
             </button>
+            { this.state.formSubmitted && loginError &&
+              <p style={{color: '#f00'}}>
+                {loginError}
+              </p>
+            }
           </form>
-          <p>This will "log you in" as this user, storing the username in the session of the API server.</p>
+
         </div>
         }
         {user &&
