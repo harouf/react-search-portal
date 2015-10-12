@@ -26,6 +26,7 @@ export default class Home extends Component {
         </div>
 
         <div className="container">
+          <p>Home Page</p>
         </div>
       </div>
     );

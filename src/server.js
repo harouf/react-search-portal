@@ -1,4 +1,5 @@
 import Express from 'express';
+import cookieParser from 'cookie-parser';
 import React from 'react';
 import ReactDOM from 'react-dom/server';
 import config from './config';
@@ -36,6 +37,7 @@ app.use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')));
 
 app.use(require('serve-static')(path.join(__dirname, '..', 'static')));
 
+app.use(cookieParser());
 // Proxy to API server
 app.use('/api', (req, res) => {
   proxy.web(req, res);
@@ -119,10 +121,6 @@ app.use((req, res) => {
 });
 
 if (config.port) {
-  if (config.isProduction) {
-    const io = new SocketIo(server);
-    io.path('/api/ws');
-  }
 
   server.listen(config.port, (err) => {
     if (err) {
